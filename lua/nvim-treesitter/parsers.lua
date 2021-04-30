@@ -181,6 +181,15 @@ list.css = {
   maintainers = {"@TravonteD"},
 }
 
+list.scss = {
+  install_info = {
+    url = 'https://github.com/serenadeai/tree-sitter-scss',
+    files = { "src/parser.c", "src/scanner.c" },
+  },
+  filetype = 'scss',
+  maintainers = {"@connorgmeehan"},
+}
+
 list.erlang = {
   install_info = {
     url = "https://github.com/AbstractMachinesLab/tree-sitter-erlang",
