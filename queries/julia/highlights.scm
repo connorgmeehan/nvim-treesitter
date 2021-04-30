@@ -63,9 +63,8 @@
     (parameterized_identifier) @type))
 
 ;; Symbol expressions (:my-wanna-be-lisp-keyword)
-;; Same highlight as in clojure
 (quote_expression
- (identifier)) @type
+ (identifier)) @symbol
 
 ;; Parsing error! foo (::Type) get's parsed as two quote expressions
 (argument_list 
@@ -120,7 +119,7 @@
 (else_clause
   ["else"] @conditional)
 (ternary_expression
-  ["?" ":"] @operator)
+  ["?" ":"] @conditional)
 
 (function_definition ["function" "end"] @keyword.function)
 
@@ -131,6 +130,8 @@
   "return"
   "macro"
   "struct"
+  "primitive"
+  "type"
 ] @keyword
 
 ((identifier) @keyword (#match? @keyword "^(global|local)$"))
@@ -175,3 +176,5 @@
 (((identifier) @boolean) (eq? @boolean "true"))
 (((identifier) @boolean) (eq? @boolean "false"))
 
+["::" ":" "." "," "..." "!"] @punctuation.delimiter
+["[" "]" "(" ")" "{" "}"] @punctuation.bracket

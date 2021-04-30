@@ -20,6 +20,8 @@ hlmap["boolean"] = "TSBoolean"
 
 hlmap["character"] = "TSCharacter"
 
+hlmap["comment"] = "TSComment"
+
 hlmap["conditional"] = "TSConditional"
 
 hlmap["constant"] = "TSConstant"
@@ -28,7 +30,7 @@ hlmap["constant.macro"] = "TSConstMacro"
 
 hlmap["constructor"] = "TSConstructor"
 
-hlmap.error = "TSError"
+hlmap["error"] = "TSError"
 hlmap["exception"] = "TSException"
 
 hlmap["field"] = "TSField"
@@ -71,6 +73,8 @@ hlmap["string"] = "TSString"
 hlmap["string.regex"] = "TSStringRegex"
 hlmap["string.escape"] = "TSStringEscape"
 
+hlmap["symbol"] = "TSSymbol"
+
 hlmap["tag"] = "TSTag"
 hlmap["tag.delimiter"] = "TSTagDelimiter"
 
@@ -82,6 +86,14 @@ hlmap["text.strike"] = "TSStrike"
 hlmap["text.title"] = "TSTitle"
 hlmap["text.literal"] = "TSLiteral"
 hlmap["text.uri"] = "TSURI"
+hlmap["text.math"] = "TSMath"
+hlmap["text.reference"] = "TSTextReference"
+hlmap["text.environment"] = "TSEnviroment"
+hlmap["text.environment.name"] = "TSEnviromentName"
+
+hlmap["text.note"] = "TSNote"
+hlmap["text.warning"] = "TSWarning"
+hlmap["text.danger"] = "TSDanger"
 
 hlmap["type"] = "TSType"
 hlmap["type.builtin"] = "TSTypeBuiltin"
@@ -98,6 +110,11 @@ function M.attach(bufnr, lang)
   end
 
   ts.highlighter.new(parser, {})
+
+  local is_table = type(config.additional_vim_regex_highlighting) == 'table'
+  if config.additional_vim_regex_highlighting and (not is_table or config.additional_vim_regex_highlighting[lang]) then
+    api.nvim_buf_set_option(bufnr, 'syntax', 'ON')
+  end
 end
 
 function M.detach(bufnr)

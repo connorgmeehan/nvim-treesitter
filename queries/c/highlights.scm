@@ -14,6 +14,7 @@
   "union"
   "volatile"
   "goto"
+  "register"
 ] @keyword
 
 [
@@ -104,7 +105,7 @@
 
 (null) @constant.builtin
 (number_literal) @number
-(char_literal) @number
+(char_literal) @character
 
 (call_expression
   function: (identifier) @function)
@@ -137,8 +138,8 @@
 (type_descriptor)
  ] @type
 
-(declaration type: [(identifier) (type_identifier)] @type)
-(cast_expression type: [(identifier) (type_identifier)] @type)
+(declaration (type_qualifier) @type)
+(cast_expression type: (type_descriptor) @type)
 (sizeof_expression value: (parenthesized_expression (identifier) @type))
 
 ((identifier) @constant
